@@ -2,15 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "fe13266879092cc32a3fc739abbfbd55",
+    "identityHash": "9814b0be4494e5f91242d32c9fa6a724",
     "entities": [
       {
         "tableName": "cheeses",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`cheese_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
-            "columnName": "_id",
+            "columnName": "cheese_id",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -23,18 +23,18 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "_id"
+            "cheese_id"
           ],
           "autoGenerate": true
         },
         "indices": [
           {
-            "name": "index_cheeses__id",
+            "name": "index_cheeses_cheese_id",
             "unique": false,
             "columnNames": [
-              "_id"
+              "cheese_id"
             ],
-            "createSql": "CREATE  INDEX `index_cheeses__id` ON `${TABLE_NAME}` (`_id`)"
+            "createSql": "CREATE  INDEX `index_cheeses_cheese_id` ON `${TABLE_NAME}` (`cheese_id`)"
           }
         ],
         "foreignKeys": []
@@ -42,7 +42,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"fe13266879092cc32a3fc739abbfbd55\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"9814b0be4494e5f91242d32c9fa6a724\")"
     ]
   }
 }

@@ -24,20 +24,25 @@ import android.support.annotation.Nullable;
  */
 public class UserPresenter {
 
+    private final LoadNoteCallback mLoadNoteCallback;
+    private final UpdateNoteCallback mUpdateNoteCallback;
+    private final NoteRepository noteRepository;
     private UserRepository mDataSource;
-
     @Nullable
     private UserView mView;
 
     private LoadUserCallback mLoadUserCallback;
     private UpdateUserCallback mUpdateUserCallback;
 
-    public UserPresenter(UserRepository dataSource, UserView view) {
+    public UserPresenter(UserRepository dataSource, NoteRepository noteRepository, UserView view) {
         mDataSource = dataSource;
+        this.noteRepository = noteRepository;
         mView = view;
 
         mLoadUserCallback = createLoadUserCallback();
+        mLoadNoteCallback = createLoadNoteCallback();
         mUpdateUserCallback = createUpdateUserCallback();
+        mUpdateNoteCallback = createUpdateNoteCallback();
     }
 
     /**
@@ -45,6 +50,7 @@ public class UserPresenter {
      */
     public void start() {
         mDataSource.getUser(mLoadUserCallback);
+        noteRepository.getUser(mLoadNoteCallback);
     }
 
     public void stop() {
@@ -59,6 +65,16 @@ public class UserPresenter {
     public void updateUserName(final String userName) {
 
         mDataSource.updateUserName(userName, mUpdateUserCallback);
+    }
+
+    /**
+     * Update the username of the user.
+     *
+     * @param userName the new userName
+     */
+    public void updateNote(final String userName) {
+
+        noteRepository.updateUserName(userName, mUpdateNoteCallback);
     }
 
     private LoadUserCallback createLoadUserCallback() {
@@ -79,10 +95,36 @@ public class UserPresenter {
         };
     }
 
+    private LoadNoteCallback createLoadNoteCallback() {
+        return new LoadNoteCallback() {
+            @Override
+            public void onNoteLoaded(Note note) {
+                if (mView != null) {
+                    mView.showNote(note.getUserName());
+                }
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                if (mView != null) {
+                    mView.hideNote();
+                }
+            }
+        };
+    }
+
     private UpdateUserCallback createUpdateUserCallback() {
         return user -> {
             if (mView != null) {
                 mView.showUserName(user.getUserName());
+            }
+        };
+    }
+
+    private UpdateNoteCallback createUpdateNoteCallback() {
+        return note -> {
+            if (mView != null) {
+                mView.showNote(note.getUserName());
             }
         };
     }

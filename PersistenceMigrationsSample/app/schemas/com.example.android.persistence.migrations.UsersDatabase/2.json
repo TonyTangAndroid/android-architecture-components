@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "99c7946712f93a4d723efbe10a500eb0",
+    "identityHash": "a50834eee9f0e9d88ae71136d2058759",
     "entities": [
       {
         "tableName": "users",
@@ -29,11 +29,37 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "notes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`noteId` INTEGER NOT NULL, `noteTitle` TEXT, PRIMARY KEY(`noteId`))",
+        "fields": [
+          {
+            "fieldPath": "mId",
+            "columnName": "noteId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mUserName",
+            "columnName": "noteTitle",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "noteId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"99c7946712f93a4d723efbe10a500eb0\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a50834eee9f0e9d88ae71136d2058759\")"
     ]
   }
 }

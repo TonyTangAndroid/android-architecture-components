@@ -16,18 +16,23 @@
 
 package com.example.android.persistence.migrations;
 
-import java.util.concurrent.Executor;
+import android.support.annotation.MainThread;
 
 /**
- * Allow instant execution of tasks.
- * Note: when using the Architecture components, for testing, you can use the
- * InstantTaskExecutorRule test rule, after adding
- * android.arch.core:core-testing to your build.gradle file.
+ * Callback called when the user was loaded from the repository.
  */
-public class SingleExecutors extends AppExecutors {
-    private static Executor instant = Runnable::run;
+public interface LoadNoteCallback {
+    /**
+     * Method called when the user was loaded from the repository.
+     *
+     * @param note the user from repository.
+     */
+    @MainThread
+    void onNoteLoaded(Note note);
 
-    public SingleExecutors() {
-        super(instant, instant, instant);
-    }
+    /**
+     * Method called when there was no user in the repository.
+     */
+    @MainThread
+    void onDataNotAvailable();
 }

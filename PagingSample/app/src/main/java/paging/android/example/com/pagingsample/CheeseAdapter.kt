@@ -54,7 +54,7 @@ class CheeseAdapter : PagedListAdapter<Cheese, CheeseViewHolder>(diffCallback) {
          *
          * @see android.support.v7.util.DiffUtil
          */
-        private val diffCallback = object : DiffUtil.ItemCallback<Cheese>() {
+        private val diffCallback = object : DiffUtil.Callback<Cheese>() {
             override fun areItemsTheSame(oldItem: Cheese, newItem: Cheese): Boolean =
                     oldItem.id == newItem.id
 

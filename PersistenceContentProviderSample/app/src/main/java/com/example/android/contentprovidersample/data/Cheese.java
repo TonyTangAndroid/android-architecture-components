@@ -20,7 +20,6 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.content.ContentValues;
-import android.provider.BaseColumns;
 
 
 /**
@@ -33,7 +32,7 @@ public class Cheese {
     public static final String TABLE_NAME = "cheeses";
 
     /** The name of the ID column. */
-    public static final String COLUMN_ID = BaseColumns._ID;
+    public static final String COLUMN_ID = "cheese_id";
 
     /** The name of the name column. */
     public static final String COLUMN_NAME = "name";

@@ -32,4 +32,8 @@ public interface UserView {
      * Hide the userName field.
      */
     void hideUserName();
+
+    void showNote(String note);
+
+    void hideNote();
 }

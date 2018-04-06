@@ -27,14 +27,8 @@ import android.support.annotation.VisibleForTesting;
 /**
  * The Room database that contains the Users table
  */
-@Database(entities = {User.class}, version = 2)
+@Database(entities = {User.class, Note.class}, version = 2)
 public abstract class UsersDatabase extends RoomDatabase {
-
-    private static UsersDatabase INSTANCE;
-
-    public abstract UserDao userDao();
-
-    private static final Object sLock = new Object();
 
     /**
      * Migrate from:
@@ -52,8 +46,22 @@ public abstract class UsersDatabase extends RoomDatabase {
             // from version 1 to version 2.
             // If no migration is provided, then the tables will be dropped and recreated.
             // Since we didn't alter the table, there's nothing else to do here.
+
+            database.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`noteId` INTEGER NOT NULL, `noteTitle` TEXT, PRIMARY KEY(`noteId`))");
+
         }
     };
+
+//    @VisibleForTesting
+//    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+//        @Override
+//        public void migrate(SupportSQLiteDatabase database) {
+//
+//        }
+//    };
+
+    private static final Object sLock = new Object();
+    private static UsersDatabase INSTANCE;
 
     public static UsersDatabase getInstance(Context context) {
         synchronized (sLock) {
@@ -66,5 +74,9 @@ public abstract class UsersDatabase extends RoomDatabase {
             return INSTANCE;
         }
     }
+
+    public abstract UserDao userDao();
+
+    public abstract NoteDao noteDao();
 
 }

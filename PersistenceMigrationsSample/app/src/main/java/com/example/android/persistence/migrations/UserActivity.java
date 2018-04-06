@@ -48,6 +48,7 @@ public class UserActivity extends AppCompatActivity implements UserView {
         mUpdateButton.setOnClickListener(v -> {
             String userName = mUserNameInput.getText().toString();
             mPresenter.updateUserName(userName);
+            mPresenter.updateNote("" + System.currentTimeMillis());
         });
 
         // Creating the repository here for simplicity.
@@ -55,7 +56,13 @@ public class UserActivity extends AppCompatActivity implements UserView {
         UserRepository userRepository = new UserRepository(new AppExecutors(),
                 LocalUserDataSource.getInstance(getApplicationContext()));
 
-        mPresenter = new UserPresenter(userRepository, this);
+
+        // Creating the repository here for simplicity.
+        // In an real app, this would be a singleton injected
+        NoteRepository noteRepository = new NoteRepository(new AppExecutors(),
+                LocalNoteDataSource.getInstance(getApplicationContext()));
+
+        mPresenter = new UserPresenter(userRepository, noteRepository, this);
     }
 
 
@@ -80,5 +87,15 @@ public class UserActivity extends AppCompatActivity implements UserView {
     @Override
     public void hideUserName() {
         mUserName.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showNote(String note) {
+        mUserName.append(" with :" + note);
+    }
+
+    @Override
+    public void hideNote() {
+
     }
 }

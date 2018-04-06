@@ -16,18 +16,27 @@
 
 package com.example.android.persistence.migrations;
 
-import java.util.concurrent.Executor;
-
 /**
- * Allow instant execution of tasks.
- * Note: when using the Architecture components, for testing, you can use the
- * InstantTaskExecutorRule test rule, after adding
- * android.arch.core:core-testing to your build.gradle file.
+ * Access point for accessing user data.
  */
-public class SingleExecutors extends AppExecutors {
-    private static Executor instant = Runnable::run;
+public interface NoteDataSource {
 
-    public SingleExecutors() {
-        super(instant, instant, instant);
-    }
+    /**
+     * Gets all the users from the data source.
+     *
+     * @return all the users from the data source.
+     */
+    Note getNote();
+
+    /**
+     * Inserts the user in the data source, or, if this is an existing user, it updates it.
+     *
+     * @param note the user to be inserted or updated.
+     */
+    void insertOrUpdateNote(Note note);
+
+    /**
+     * Deletes all users from the data source.
+     */
+    void deleteAllNote();
 }
