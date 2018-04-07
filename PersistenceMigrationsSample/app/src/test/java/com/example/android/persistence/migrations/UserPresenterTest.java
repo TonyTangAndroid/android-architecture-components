@@ -73,7 +73,7 @@ public class UserPresenterTest {
         mUpdateUserCallbackArgumentCaptor.getValue().onUserUpdated(user);
 
         // Verify that the username is set in the view
-        verify(mView).showUserName("user name");
+        verify(mView).showUserName("user name", user.getLastModified());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class UserPresenterTest {
         mLoadUserCallbackArgumentCaptor.getValue().onUserLoaded(user);
 
         // The view is updated with the correct user name
-        verify(mView).showUserName("user name");
+        verify(mView).showUserName("user name", user.getLastModified());
     }
 
     @Test

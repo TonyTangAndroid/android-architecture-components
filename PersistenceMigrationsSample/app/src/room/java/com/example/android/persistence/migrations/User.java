@@ -20,6 +20,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.Nullable;
 
 import java.util.Random;
 
@@ -36,8 +37,9 @@ public class User {
     @ColumnInfo(name = "username")
     private String mUserName;
 
+    @Nullable
     @ColumnInfo(name = "lastModified")
-    private long mLastModified;
+    private Long mLastModified;
 
     @Ignore
     public User(String userName, long lastModified) {
@@ -56,7 +58,7 @@ public class User {
         this.mLastModified = lastModified;
     }
 
-    public long getLastModified() {
+    public Long getLastModified() {
         return mLastModified;
     }
 

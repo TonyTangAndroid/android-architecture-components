@@ -26,6 +26,7 @@ public class User {
     private int mId;
 
     private String mUserName;
+    private Long mLastModified;
 
     public User(String userName) {
         // DO NOT USE Integer Random values for primary keys.
@@ -34,11 +35,16 @@ public class User {
         // The ID is updated to a UUID String in the room3 flavor.
         mId = new Random(Integer.MAX_VALUE).nextInt();
         mUserName = userName;
+        mLastModified = System.currentTimeMillis();
     }
 
     public User(int id, String userName) {
         this.mId = id;
         this.mUserName = userName;
+    }
+
+    public Long getLastModified() {
+        return mLastModified;
     }
 
     public int getId() {

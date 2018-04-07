@@ -66,7 +66,7 @@ public class UserPresenter {
             @Override
             public void onUserLoaded(User user) {
                 if (mView != null) {
-                    mView.showUserName(user.getUserName());
+                    mView.showUserName(user.getUserName(), user.getLastModified());
                 }
             }
 
@@ -82,7 +82,7 @@ public class UserPresenter {
     private UpdateUserCallback createUpdateUserCallback() {
         return user -> {
             if (mView != null) {
-                mView.showUserName(user.getUserName());
+                mView.showUserName(user.getUserName(), user.getLastModified());
             }
         };
     }

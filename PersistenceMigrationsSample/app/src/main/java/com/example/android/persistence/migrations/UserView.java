@@ -25,8 +25,9 @@ public interface UserView {
      * Display a userName on the screen
      *
      * @param userName the userName
+     * @param lastModified
      */
-    void showUserName(String userName);
+    void showUserName(String userName, Long lastModified);
 
     /**
      * Hide the userName field.

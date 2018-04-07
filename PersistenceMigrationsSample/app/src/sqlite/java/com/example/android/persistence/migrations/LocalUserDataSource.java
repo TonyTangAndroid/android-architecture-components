@@ -16,18 +16,16 @@
 
 package com.example.android.persistence.migrations;
 
-import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry
-        .COLUMN_NAME_ENTRY_ID;
-import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry
-        .COLUMN_NAME_USERNAME;
-import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry
-        .TABLE_NAME;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+
+import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry.COLUMN_NAME_ENTRY_ID;
+import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry.COLUMN_NAME_LAST_MODIFIED;
+import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry.COLUMN_NAME_USERNAME;
+import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry.TABLE_NAME;
 
 /**
  * Concrete implementation of the UserDataSource, working directly with SQLite APIs.
@@ -88,6 +86,7 @@ public class LocalUserDataSource implements UserDataSource {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME_ENTRY_ID, user.getId());
         values.put(COLUMN_NAME_USERNAME, user.getUserName());
+        values.put(COLUMN_NAME_LAST_MODIFIED, user.getLastModified());
 
         db.insertWithOnConflict(TABLE_NAME, null, values,
                 SQLiteDatabase.CONFLICT_REPLACE);

@@ -23,6 +23,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Date;
+
 /**
  * Main screen of the app. Displays a user name and allows the option to update the user name.
  */
@@ -72,9 +74,9 @@ public class UserActivity extends AppCompatActivity implements UserView {
     }
 
     @Override
-    public void showUserName(String userName) {
+    public void showUserName(String userName, Long lastModified) {
         mUserName.setVisibility(View.VISIBLE);
-        mUserName.setText(userName);
+        mUserName.setText(userName + ":" + new Date(lastModified));
     }
 
     @Override
