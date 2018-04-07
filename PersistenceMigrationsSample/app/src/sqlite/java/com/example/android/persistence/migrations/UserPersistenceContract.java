@@ -33,6 +33,7 @@ public final class UserPersistenceContract {
     public static abstract class UserEntry implements BaseColumns {
         public static final String TABLE_NAME = "users";
         public static final String COLUMN_NAME_ENTRY_ID = "userid";
+        public static final String COLUMN_NAME_LAST_MODIFIED = "lastModified";
         public static final String COLUMN_NAME_USERNAME = "username";
     }
 }

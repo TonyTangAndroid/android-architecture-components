@@ -36,19 +36,28 @@ public class User {
     @ColumnInfo(name = "username")
     private String mUserName;
 
+    @ColumnInfo(name = "lastModified")
+    private long mLastModified;
+
     @Ignore
-    public User(String userName) {
+    public User(String userName, long lastModified) {
         // DO NOT USE Integer Random values for primary keys.
         // This is using an Integer to showcase a WRONG implementation that has to be fixed
         // afterwards by updating the schema.
         // The ID is updated to a UUID String in the room3 flavor.
         mId = new Random(Integer.MAX_VALUE).nextInt();
         mUserName = userName;
+        mLastModified = lastModified;
     }
 
-    public User(int id, String userName) {
+    public User(int id, String userName, long lastModified) {
         this.mId = id;
         this.mUserName = userName;
+        this.mLastModified = lastModified;
+    }
+
+    public long getLastModified() {
+        return mLastModified;
     }
 
     public int getId() {

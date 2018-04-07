@@ -16,16 +16,14 @@
 
 package com.example.android.persistence.migrations;
 
-import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry
-        .COLUMN_NAME_ENTRY_ID;
-import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry
-        .COLUMN_NAME_USERNAME;
-import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry
-        .TABLE_NAME;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry.COLUMN_NAME_ENTRY_ID;
+import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry.COLUMN_NAME_LAST_MODIFIED;
+import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry.COLUMN_NAME_USERNAME;
+import static com.example.android.persistence.migrations.UserPersistenceContract.UserEntry.TABLE_NAME;
 
 public class UsersDbHelper extends SQLiteOpenHelper {
 
@@ -35,7 +33,8 @@ public class UsersDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " (" +
-                    COLUMN_NAME_ENTRY_ID + " INTEGER  PRIMARY KEY NOT NULL," +
+                    COLUMN_NAME_ENTRY_ID + " INTEGER PRIMARY KEY NOT NULL," +
+                    COLUMN_NAME_LAST_MODIFIED + " INTEGER DEFAULT 0," +
                     COLUMN_NAME_USERNAME + " TEXT )";
 
     public UsersDbHelper(Context context) {

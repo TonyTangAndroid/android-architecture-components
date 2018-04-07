@@ -78,8 +78,8 @@ public class UserRepository {
         final WeakReference<UpdateUserCallback> updateUserCallback = new WeakReference<>(callback);
 
         final User user = mCachedUser == null
-                ? new User(userName)
-                : new User(mCachedUser.getId(), userName);
+                ? new User(userName, 0)
+                : new User(mCachedUser.getId(), userName, 0);
 
         // update the user on the I/O thread
         mAppExecutors.diskIO().execute(new Runnable() {
