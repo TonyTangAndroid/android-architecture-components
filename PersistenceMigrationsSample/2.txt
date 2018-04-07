@@ -1,0 +1,6 @@
+TableInfo{name='users',
+columns={
+userid=Column{name='userid', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=1},
+username=Column{name='username', type='TEXT', affinity='2', notNull=false, primaryKeyPosition=0},
+lastModified=Column{name='lastModified', type='INTEGER', affinity='3', notNull=false, primaryKeyPosition=0}},
+foreignKeys=[], indices=[]}
