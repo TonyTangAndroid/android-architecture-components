@@ -34,8 +34,8 @@ class InMemoryByItemRepository(
         private val redditApi: RedditApi,
         private val networkExecutor: Executor) : RedditPostRepository {
     @MainThread
-    override fun postsOfSubreddit(subredditName: String, pageSize: Int): Listing<RedditPost> {
-        val sourceFactory = SubRedditDataSourceFactory(redditApi, subredditName, networkExecutor)
+    override fun postsOfSubreddit(subReddit: String, pageSize: Int): Listing<RedditPost> {
+        val sourceFactory = SubRedditDataSourceFactory(redditApi, subReddit, networkExecutor)
         val pagedListConfig = PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
                 .setInitialLoadSizeHint(pageSize * 2)
@@ -44,7 +44,7 @@ class InMemoryByItemRepository(
         val pagedList = LivePagedListBuilder(sourceFactory, pagedListConfig)
                 // provide custom executor for network requests, otherwise it will default to
                 // Arch Components' IO pool which is also used for disk access
-                .setBackgroundThreadExecutor(networkExecutor)
+                .setFetchExecutor(networkExecutor)
                 .build()
 
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
