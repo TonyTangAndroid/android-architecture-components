@@ -16,15 +16,14 @@
 
 package paging.android.example.com.pagingsample
 
+import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ItemTouchHelper
-import android.view.KeyEvent
-import android.view.View
-import android.view.inputmethod.EditorInfo
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
