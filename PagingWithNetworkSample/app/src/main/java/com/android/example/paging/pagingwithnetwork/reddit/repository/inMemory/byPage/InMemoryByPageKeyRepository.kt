@@ -32,13 +32,13 @@ import java.util.concurrent.Executor
 class InMemoryByPageKeyRepository(private val redditApi: RedditApi,
                                   private val networkExecutor: Executor) : RedditPostRepository {
     @MainThread
-    override fun postsOfSubreddit(subredditName: String, pageSize: Int): Listing<RedditPost> {
-        val sourceFactory = SubRedditDataSourceFactory(redditApi, subredditName, networkExecutor)
+    override fun postsOfSubreddit(subReddit: String, pageSize: Int): Listing<RedditPost> {
+        val sourceFactory = SubRedditDataSourceFactory(redditApi, subReddit, networkExecutor)
 
         val livePagedList = LivePagedListBuilder(sourceFactory, pageSize)
                 // provide custom executor for network requests, otherwise it will default to
                 // Arch Components' IO pool which is also used for disk access
-                .setBackgroundThreadExecutor(networkExecutor)
+                .setFetchExecutor(networkExecutor)
                 .build()
 
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
