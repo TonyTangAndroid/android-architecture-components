@@ -16,11 +16,11 @@
 
 package com.android.example.paging.pagingwithnetwork.reddit.repository.inDb
 
+import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
-import androidx.annotation.MainThread
 import com.android.example.paging.pagingwithnetwork.reddit.api.RedditApi
 import com.android.example.paging.pagingwithnetwork.reddit.db.RedditDb
 import com.android.example.paging.pagingwithnetwork.reddit.repository.Listing
@@ -54,7 +54,7 @@ class DbRedditPostRepository(
                 val start = db.posts().getNextIndexInSubreddit(subredditName)
                 val items = posts.mapIndexed { index, child ->
                     child.data.indexInResponse = start + index
-                    child.data
+                   child.data
                 }
                 db.posts().insert(items)
             }

@@ -23,8 +23,6 @@ import com.android.example.paging.pagingwithnetwork.reddit.api.RedditApi
 import com.android.example.paging.pagingwithnetwork.reddit.db.RedditDb
 import com.android.example.paging.pagingwithnetwork.reddit.repository.RedditPostRepository
 import com.android.example.paging.pagingwithnetwork.reddit.repository.inDb.DbRedditPostRepository
-import com.android.example.paging.pagingwithnetwork.reddit.repository.inMemory.byItem.InMemoryByItemRepository
-import com.android.example.paging.pagingwithnetwork.reddit.repository.inMemory.byPage.InMemoryByPageKeyRepository
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
@@ -87,12 +85,6 @@ open class DefaultServiceLocator(val app: Application, val useInMemoryDb: Boolea
 
     override fun getRepository(type: RedditPostRepository.Type): RedditPostRepository {
         return when (type) {
-            RedditPostRepository.Type.IN_MEMORY_BY_ITEM -> InMemoryByItemRepository(
-                    redditApi = getRedditApi(),
-                    networkExecutor = getNetworkExecutor())
-            RedditPostRepository.Type.IN_MEMORY_BY_PAGE -> InMemoryByPageKeyRepository(
-                    redditApi = getRedditApi(),
-                    networkExecutor = getNetworkExecutor())
             RedditPostRepository.Type.DB -> DbRedditPostRepository(
                     db = db,
                     redditApi = getRedditApi(),

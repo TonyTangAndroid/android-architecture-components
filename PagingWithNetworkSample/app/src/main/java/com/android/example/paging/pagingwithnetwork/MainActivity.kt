@@ -33,12 +33,6 @@ class MainActivity : AppCompatActivity() {
         withDatabase.setOnClickListener {
             show(RedditPostRepository.Type.DB)
         }
-        networkOnly.setOnClickListener {
-            show(RedditPostRepository.Type.IN_MEMORY_BY_ITEM)
-        }
-        networkOnlyWithPageKeys.setOnClickListener {
-            show(RedditPostRepository.Type.IN_MEMORY_BY_PAGE)
-        }
     }
 
     private fun show(type: RedditPostRepository.Type) {
