@@ -16,13 +16,13 @@
 
 package com.android.example.paging.pagingwithnetwork.reddit.ui
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.android.example.paging.pagingwithnetwork.R
 import com.android.example.paging.pagingwithnetwork.reddit.repository.NetworkState
 import com.android.example.paging.pagingwithnetwork.reddit.repository.Status.FAILED
@@ -38,15 +38,17 @@ class NetworkStateItemViewHolder(view: View,
     private val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar)
     private val retry = view.findViewById<Button>(R.id.retry_button)
     private val errorMsg = view.findViewById<TextView>(R.id.error_msg)
+
     init {
         retry.setOnClickListener {
             retryCallback()
         }
     }
+
     fun bindTo(networkState: NetworkState?) {
         progressBar.visibility = toVisibility(networkState?.status == RUNNING)
-        retry.visibility = toVisibility(networkState?.status == FAILED)
-        errorMsg.visibility = toVisibility(networkState?.msg != null)
+        retry.visibility = toVisibility(networkState?.status == FAILED && networkState.status != RUNNING)
+        errorMsg.visibility = toVisibility(networkState?.msg != null && networkState.status != RUNNING)
         errorMsg.text = networkState?.msg
     }
 
@@ -57,7 +59,7 @@ class NetworkStateItemViewHolder(view: View,
             return NetworkStateItemViewHolder(view, retryCallback)
         }
 
-        fun toVisibility(constraint : Boolean): Int {
+        fun toVisibility(constraint: Boolean): Int {
             return if (constraint) {
                 View.VISIBLE
             } else {

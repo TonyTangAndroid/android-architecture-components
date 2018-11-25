@@ -70,6 +70,7 @@ class ItemKeyedSubredditDataSource(
         networkState.postValue(NetworkState.LOADING)
         // even though we are using async retrofit API here, we could also use sync
         // it is just different to show that the callback can be called async.
+        Thread.sleep(1000)
         redditApi.getTopAfter(subreddit = subredditName,
                 after = params.key,
                 limit = params.requestedLoadSize).enqueue(

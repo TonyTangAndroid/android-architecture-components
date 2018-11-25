@@ -16,10 +16,10 @@
 
 package com.android.example.paging.pagingwithnetwork.reddit.ui
 
+import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import android.view.ViewGroup
 import com.android.example.paging.pagingwithnetwork.GlideRequests
 import com.android.example.paging.pagingwithnetwork.R
 import com.android.example.paging.pagingwithnetwork.reddit.repository.NetworkState
@@ -87,7 +87,7 @@ class PostsAdapter(
                 notifyItemInserted(super.getItemCount())
             }
         } else if (hasExtraRow && previousState != newNetworkState) {
-            notifyItemChanged(itemCount - 1)
+            notifyItemChanged(super.getItemCount())
         }
     }
 
